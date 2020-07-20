@@ -10,7 +10,7 @@ const MyPosts = (props) => {
 
     let onPostChange = () => {
         let text=addNewPostRef.current.value
-        props.updateNewPostText(text)
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
     }
 
     return (
@@ -19,7 +19,7 @@ const MyPosts = (props) => {
             <div>
                 <textarea ref={addNewPostRef} value={props.newPostMessageText} onChange={onPostChange}/>
                 <div>
-                    <button onClick={() => props.addPost(addNewPostRef.current.value)}>Add post</button>
+                    <button onClick={() => props.dispatch({type: 'ADD-NEW-POST'})}>Add post</button>
                 </div>
             </div>
 

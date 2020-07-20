@@ -31,32 +31,30 @@ let store = {
 
 
     },
-
-    getState() { return this._state},
-
     _callSubscriber() {
         console.log("asdfasdf")
     },
-
-    addPost(newPostMessage) {
-        debugger
-        let newPost = {
-            message: this._state.newPostMessageText,
-            likesCount: 0
-
-        }
-
-        this._state.posts.push(newPost)
-        this._callSubscriber(this.getState())
-    },
-
-    updateNewPostText(newText) {
-        this._state.newPostMessageText = newText
-        this._callSubscriber(this.getState())
-    },
+    getState() { return this._state},
 
     subscribe(observer) {
         this._callSubscriber = observer
+    },
+
+    dispatch(action) {
+
+        if (action.type === 'ADD-NEW-POST'){
+            let newPost = {
+                message: this._state.newPostMessageText,
+                likesCount: 0
+
+            }
+
+            this._state.posts.push(newPost)
+            this._callSubscriber(this.getState())
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._state.newPostMessageText = action.newText
+            this._callSubscriber(this.getState())
+        }
     }
 }
 
