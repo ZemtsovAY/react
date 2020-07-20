@@ -1,56 +1,64 @@
-let rerenderEntireTree = () => {
-    console.log("asdfasdf")
-}
+let store = {
 
-let state = {
+    _state: {
 
-    dialogsPage: {
-        dialogs: [
-            {userId: 1, userName: 'Dimych'},
-            {userId: 2, userName: 'Sveta'},
-            {userId: 3, userName: 'Kostya'},
-            {userId: 4, userName: 'Pasha'},
-            {userId: 5, userName: 'Petya'},
-            {userId: 6, userName: 'Igor'},
+        dialogsPage: {
+            dialogs: [
+                {userId: 1, userName: 'Dimych'},
+                {userId: 2, userName: 'Sveta'},
+                {userId: 3, userName: 'Kostya'},
+                {userId: 4, userName: 'Pasha'},
+                {userId: 5, userName: 'Petya'},
+                {userId: 6, userName: 'Igor'},
+            ],
+
+            messages: [
+                {messageId: 1, message: 'hello'},
+                {messageId: 2, message: 'How are yoy'},
+                {messageId: 3, message: 'bla'},
+                {messageId: 4, message: 'asdfasdf'},
+                {messageId: 5, message: 'asdfasdfasdf asdf'},
+                {messageId: 6, message: 'Iasdf'}
+            ]
+        },
+
+        posts: [
+            {message: 'Hi, how are you?', likesCount: '5'},
+            {message: "It's my first post", likesCount: '23'}
         ],
 
-        messages: [
-            {messageId: 1, message: 'hello'},
-            {messageId: 2, message: 'How are yoy'},
-            {messageId: 3, message: 'bla'},
-            {messageId: 4, message: 'asdfasdf'},
-            {messageId: 5, message: 'asdfasdfasdf asdf'},
-            {messageId: 6, message: 'Iasdf'}
-        ]
+        newPostMessageText: "Enter new message",
+
+
     },
 
-    posts: [
-        {message: 'Hi, how are you?', likesCount: '5'},
-        {message: "It's my first post", likesCount: '23'}
-    ],
+    getState() { return this._state},
 
-    newPostMessageText: "Enter new message"
+    _callSubscriber() {
+        console.log("asdfasdf")
+    },
 
-}
+    addPost(newPostMessage) {
+        debugger
+        let newPost = {
+            message: this._state.newPostMessageText,
+            likesCount: 0
 
+        }
 
-export let addPost = (newPostMessage) => {
-    let newPost = {
-        message: newPostMessage,
-        likesCount: 0
+        this._state.posts.push(newPost)
+        this._callSubscriber(this.getState())
+    },
 
+    updateNewPostText(newText) {
+        this._state.newPostMessageText = newText
+        this._callSubscriber(this.getState())
+    },
+
+    subscribe(observer) {
+        this._callSubscriber = observer
     }
-
-    state.posts.push(newPost)
-    rerenderEntireTree()
 }
 
-export let subscribe = (observer) => {rerenderEntireTree = observer}
 
-
-export let updateNewPostText = (newText) => {
-    state.newPostMessageText = newText
-    rerenderEntireTree()
-}
-
-export default state
+export default store
