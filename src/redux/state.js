@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-NEW-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
 let store = {
 
     _state: {
@@ -42,21 +45,23 @@ let store = {
 
     dispatch(action) {
 
-        if (action.type === 'ADD-NEW-POST'){
+        if (action.type === 'ADD-NEW-POST') {
             let newPost = {
                 message: this._state.newPostMessageText,
                 likesCount: 0
-
             }
-
             this._state.posts.push(newPost)
             this._callSubscriber(this.getState())
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        }
+
+        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.newPostMessageText = action.newText
             this._callSubscriber(this.getState())
         }
     }
 }
 
+export const addNewPostActionCreator = () => ({ type: ADD_POST })
+export const UpdatePostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 
 export default store
