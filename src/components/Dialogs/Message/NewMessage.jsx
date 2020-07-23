@@ -1,12 +1,14 @@
 import React from "react";
+import {addNewMessageActionCreator} from "../../../redux/dialogs-reducer";
 
 const NewMessage = (props) => {
     let addNewMessageRef = React.createRef();
+    const addNewMessage = (e) => {props.dispatch(addNewMessageActionCreator(7, addNewMessageRef.current.value ))};
     return (
         <div>
-            <textarea ref={addNewMessageRef}></textarea>
+            <textarea ref={addNewMessageRef} />
             <div>
-                <button onClick={() => alert(addNewMessageRef.current.value)}>Send</button>
+                <button onClick={() => addNewMessage()}>Send</button>
             </div>
         </div>
     )

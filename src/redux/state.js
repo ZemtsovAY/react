@@ -1,5 +1,6 @@
-const ADD_POST = 'ADD-NEW-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
+
 
 let store = {
 
@@ -22,46 +23,39 @@ let store = {
                 {messageId: 4, message: 'asdfasdf'},
                 {messageId: 5, message: 'asdfasdfasdf asdf'},
                 {messageId: 6, message: 'Iasdf'}
-            ]
+            ],
+
+            newMessageText: "bla bla bla"
         },
 
-        posts: [
-            {message: 'Hi, how are you?', likesCount: '5'},
-            {message: "It's my first post", likesCount: '23'}
-        ],
+        postsPage: {
+            posts: [
+                {message: 'Hi, how are you?', likesCount: '5'},
+                {message: "It's my first post", likesCount: '23'}
+            ],
 
-        newPostMessageText: "Enter new message",
-
+            newPostMessageText: "Enter new message",
+        }
 
     },
     _callSubscriber() {
         console.log("asdfasdf")
     },
-    getState() { return this._state},
+    getState() {
+        return this._state
+    },
 
     subscribe(observer) {
         this._callSubscriber = observer
     },
 
     dispatch(action) {
+        this._state.postsPage = profileReducer(this._state.postsPage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._callSubscriber(this._state)
 
-        if (action.type === 'ADD-NEW-POST') {
-            let newPost = {
-                message: this._state.newPostMessageText,
-                likesCount: 0
-            }
-            this._state.posts.push(newPost)
-            this._callSubscriber(this.getState())
-        }
-
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.newPostMessageText = action.newText
-            this._callSubscriber(this.getState())
-        }
     }
 }
 
-export const addNewPostActionCreator = () => ({ type: ADD_POST })
-export const UpdatePostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 
 export default store
