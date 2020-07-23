@@ -10,25 +10,27 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Dialogs from "./components/Dialogs/Dialog/Dialogs";
-import {updateNewPostText} from "./redux/state";
+import {updateNewPostText} from "./redux/store";
 
 const App = (props) => {
     return (
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path='/profile' render={() => (<Profile state={props.state.profilePage.posts}
+                                                               newPostMessageText={props.state.profilePage.newPostMessageText}
+                                                               dispatch={props.dispatch}/>)}/>
+                <Route path='/dialogs'
+                       render={() => (<Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>)}/>
+                <Route path='/news' component={News}/>
+                <Route path='/music' component={Music}/>
+                <Route path='/settings' component={Settings}/>
 
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/profile' render={() => (<Profile state={props.state.postsPage.posts} newPostMessageText={props.state.postsPage.newPostMessageText} dispatch={props.dispatch} />)}/>
-                    <Route path='/dialogs' render={() => (<Dialogs state={props.state.dialogsPage} dispatch={props.dispatch}/>)}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-
-                </div>
-                <Foot/>
             </div>
-        );
+            <Foot/>
+        </div>
+    );
 }
 
 export default App;
