@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import {updateNewPostText} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
   return (
@@ -12,7 +13,7 @@ const Profile = (props) => {
       <div>
         ava + description
       </div>
-      <MyPosts state={props.state} newPostMessageText={props.newPostMessageText} dispatch={props.dispatch}/>
+      <MyPostsContainer store={props.store}/>
     </div>
   )
 }

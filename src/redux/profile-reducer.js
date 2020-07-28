@@ -7,7 +7,7 @@ const initialState = {
         {message: "It's my first post", likesCount: '23'}
     ],
 
-    newPostMessageText: "Enter new message",
+    newPostMessageText: "",
 
 }
 
