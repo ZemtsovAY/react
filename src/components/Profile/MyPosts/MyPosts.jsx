@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addNewPostActionCreator, UpdatePostTextActionCreator} from "../../../redux/profile-reducer";
 
 
 const MyPosts = (props) => {
@@ -18,7 +17,7 @@ const MyPosts = (props) => {
 
     return (
         <div>
-            <h1>My posts:</h1>
+            <h3>My posts:</h3>
             <div>
                 <textarea ref={addNewPostRef} placeholder="Введите сообщение"value={props.newPostMessageText} onChange={onPostChange}/>
                 <div>
