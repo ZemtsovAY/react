@@ -1,0 +1,19 @@
+.usersItem {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+}
+.userInfo {
+    padding: 10px;
+    border: solid grey;
+    border-radius: 10px;
+}
+
+.userPhoto {
+    width: 70px;
+    height: 70px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
