@@ -16,4 +16,9 @@
 
 .selectedPage {
     font-weight: bold;
+
+}
+
+.pagination {
+    padding: 5px;
 }
